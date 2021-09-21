@@ -1,0 +1,115 @@
+<form class="mt-4" name="container-form">
+    <h2>Danh sách sinh viên</h2>
+    <table class="table mt-4">
+        <thead>
+            <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên sinh viên</th>
+                <th scope="col">Tuổi</th>
+                <th scope="col">Lớp</th>
+                <th scope="col">Cập nhật</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each student}}
+            <tr>
+                <th scope="row">{{sum @index 1}}</th>
+                <td>{{this.name}}</td>
+                <td>{{this.age}}</td>
+                <td>{{this.class}}</td>
+                <td>
+                    <a href="/students/{{this._id}}/edit" class="btn btn-info">Sửa</a>
+                    <a href="" class="btn btn-danger" data-toggle="modal" data-id="{{this._id}}" data-target="#delete-data">Xóa</a>
+                </td>
+            </tr>
+            {{else}}
+            <tr>
+              <td colspan="5" class="text-center">
+                Chưa có sinh viên nào. 
+                <a href="/create">Thêm sinh viên</a>
+              </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</form>
+
+{{!-- Confirm delete --}}
+<div class="modal fade" id="delete-data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Xóa dữ liệu?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Bạn có chắn chắn muốn xóa?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+        <button id="btn-delete-data" type="button" class="btn btn-danger">Xóa bỏ</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- Form để submit--}}
+<form name="deleteForm" method="POST"></form>
+
+<script>
+    //Khi dialog confirm clicked
+    document.addEventListener('DOMContentLoaded', function() {
+        var dataID
+        var deleteForm = document.forms['deleteForm']
+        var containerForm = document.forms['container-form']
+        var btnDeleteData = document.getElementById('btn-delete-data')
+        var checkboxAll = $('#checkbox-all')
+        var courseItemCheckbox = $('input[name="courseIds[]"]')
+        var checkAllSubmitBtn = $('.check-all-submit-btn')   
+    
+        $('#delete-data').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            dataID = button.data('id')
+
+    })
+    btnDeleteData.onclick = function() {
+        deleteForm.action = '/students/' + dataID + '?_method=DELETE'
+        deleteForm.submit()
+    }
+
+    //Khi checkbox changed
+    checkboxAll.change(function() {
+      var isCheckedAll = $(this).prop('checked')
+      courseItemCheckbox.prop('checked', isCheckedAll)
+      renderCheckAllSubmitBtn()
+    })
+    
+
+    //Courese Item Checkbox changed
+    courseItemCheckbox.change(function() {
+      var isCheckedAll = courseItemCheckbox.length === $('input[name="courseIds[]"]:checked').length
+      checkboxAll.prop('checked', isCheckedAll)
+      renderCheckAllSubmitBtn()
+    })
+
+    //Check all submit button clicked
+    checkAllSubmitBtn.on('submit', function(e) {
+      var isSubmittable = !$(this).hasClass('disabled')
+      if (!isSubmittable){
+         e.preventDefault()
+      }
+    })
+
+    //Re-Render check all submit buton
+    function renderCheckAllSubmitBtn(){
+      var checkedCount = $('input[name="courseIds[]"]:checked').length
+      if (checkedCount > 0) {
+        checkAllSubmitBtn.removeClass('disabled')
+      } else{
+        checkAllSubmitBtn.addClass('disabled')
+      }
+    }
+})
+</script>

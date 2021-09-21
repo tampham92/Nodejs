@@ -1,0 +1,23 @@
+<div class="mt-4">
+    <h3>Sửa sinh viên</h3>
+
+    <form method="POST" class="mt-4" action="/students/{{student._id}}?_method=PUT">
+        <div class="form-group">
+            <label for="name">Tên sinh viên</label>
+            <input type="text" class="form-control" value="{{student.name}}" id="name" name="name">
+        </div>
+        <div class="form-group">
+            <label for="image">Tuổi</label>
+            <input type="text" class="form-control" value="{{student.age}}" id="age" name="age">
+        </div>
+        <div class="form-group">
+            <label for="image">Lớp</label>
+            <input type="text" class="form-control" value="{{student.class}}" id="class" name="class">
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" class="form-control" value="{{student.image}}" id="image" name="image">
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu lại</button>
+    </form>
+</div>
