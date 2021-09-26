@@ -46,6 +46,6 @@ app.set('views', path.join(__dirname, 'resources', 'views'))
 //Routes init: lấy ra từ routes/index.js
 route(app)
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 3000, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
