@@ -5,29 +5,49 @@ const { mongooseToObject } = require('../../util/mongoose')
 
 
 class AccountController {
-
+    //[GET] /signup
+    signup(req, res, next){
+        res.render('auth/signup')
+    }
     //[POST] /account/register
     register(req, res, next){
+        const name = req.body.name
+        const email = req.body.email
         const username = req.body.username
         const password = req.body.password
+        const role = req.body.role
         Account.findOne({
-            username: username
+            username: username,
+            email: email
         })
         .then(data => {
             if(data) {
-                res.json('Tai khoan da ton tai')
+                res.json({
+                    result: 0,
+                    message: 'Tai khoan da ton tai'
+                })
             } else{
                 return Account.create({
+                    name: name,
+                    email: email,
                     username: username,
                     password: password,
+                    role: role
                 })
             }   
         })   
-        .then(data => {
-            res.json('Tao tai khoan thanh cong')
+        .then((data) => {
+            console.log(data)
+            res.json({
+                result: 1,
+                message: data
+            })
         })
-        .catch(error => {
-            res.status(500).json('Tao tai khoan that bai')
+        .catch(() => {
+            res.status(500).json({
+                result: 0,
+                message: 'Tao tai khoan thất bại'
+            })
         })
     }
 
@@ -48,10 +68,12 @@ class AccountController {
                     var token = jwt.sign({
                         _id: account._id
                     }, 'mk')
+                    req.session.token = token
                     res.json({
                         message: 'Đăng nhập thành công',
                         token: token
                     })
+
                 } else {
                     res.json("Sai thong tin")
                 }

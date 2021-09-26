@@ -8,18 +8,35 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Options
           </a>
+          {{#if user}}
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/create">Thêm sinh viên</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/me/stored-students">Danh sách sinh viên</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Đăng xuất</a>
+            <a class="dropdown-item" href="/logout">Đăng xuất</a>
           </div>
+          {{/if}}
         </li>
       </ul>
     </div>
+
   </div>
 </nav>
+
+
+<script>
+  function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+  }
+</script>

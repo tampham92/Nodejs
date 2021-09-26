@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 async function connect() {
     try {
-        await mongoose.connect('mongodb://localhost:27017/QuanLySV', {
+        await mongoose.connect('mongodb+srv://appQlsv_user:bIJNlpBfL8okiold@cluster0.qr7sp.mongodb.net/appQlsv_01?retryWrites=true&w=majority', {
             useCreateIndex: true,
             useNewUrlParser: true,
             useUnifiedTopology: true
@@ -14,3 +14,6 @@ async function connect() {
 }
 
 module.exports = { connect }
+
+//
+//bIJNlpBfL8okiold appQlsv_user

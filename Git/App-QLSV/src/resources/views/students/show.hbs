@@ -1,17 +1,15 @@
-<div class="mt-4">
-    <div class="row"></div>
-        <div class="col-lg-9">
-            <h2>{{student.name}}</h2>
-            <p>{{student.age}}</p>
-            <img src="{{student.image}}" alt="">
+<div class="mt-4 col d-flex justify-content-center ">
+    <div class="card text-center">
+        <div class="card-header">
+            <h5 class="card-title"> Thông tin chi tiết</h5>
         </div>
-        <div class="col-lg-3">
-            <a href="">
-                <button>Cập nhật</button>
-            </a>
-        </div>
-         <div class="col-lg-9">
-            <table></table>
+        <div class="card-body">
+            <h2 class="card-title">{{student.name}}</h2>
+            <h4 class="card-title">Tuổi: {{student.age}}</h4>
+            <img src="{{student.image}}" class="img-fluid rounded-start" alt="...">
+            <h5 class="card-title">Giới thiệu</h5>
+            <p class="card-text">{{student.introduce}}</p>
+            <a href="/students/{{student._id}}/edit" class="btn btn-primary">Cập nhật</a>
         </div>
     </div>
 </div>

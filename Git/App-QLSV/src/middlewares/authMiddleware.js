@@ -2,14 +2,15 @@ const jwt = require('jsonwebtoken')
 const Account = require('../app/models/Account')
 module.exports.checkLogin = (req, res, next) => {
     try {
-      var token = req.cookies.token
+      var token = req.session.token
       var idUser = jwt.verify(token, 'mk')
       Account.findOne({
         _id: idUser
       })
       .then((user) =>{
         if (user) {
-          req.user = user
+          req.session.user = user
+          res.locals.user = user.username
           next()
         } else {
           

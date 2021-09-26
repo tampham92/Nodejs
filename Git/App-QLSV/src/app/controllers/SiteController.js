@@ -89,6 +89,14 @@ class SiteController {
             .then(()=>{ res.redirect('/me/stored-students') })
             .catch(next)
     }
+
+    
+
+    logout(req, res) {
+        req.session.destroy(function (err) {
+            return res.redirect('/auth/login');
+        });
+    }
 }
 
 module.exports = new SiteController

@@ -1,43 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>login</title>
-    <link rel="stylesheet" href="../css/login.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
+<base href="http://localhost:3000" />
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
 <body>
-    <div class="container">
+    <div class="container mt-4">
         <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <form onsubmit="event.preventDefault()" class="box">
-                        <h1>Login</h1>
-                        <p class="text-muted"> Please enter your username and password!</p> 
-                        <input type="text" id="username" name="login" placeholder="Username"> 
-                        <input type="password" id="password" name="login" placeholder="Password"> 
-                        <a class="forgot text-muted" href="#">Forgot password?</a>
-                        <button class="btnLogin" id="loginBtn">Login</button>
-                        <div class="col-md-12">
-                            <ul class="social-network social-circle">
-                                <li><a href="#" class="icoFacebook" title="Facebook"><i class="fab fa-facebook-f"></i></a></li>
-                                <li><a href="#" class="icoTwitter" title="Twitter"><i class="fab fa-twitter"></i></a></li>
-                                <li><a href="#" class="icoGoogle" title="Google +"><i class="fab fa-google-plus"></i></a></li>
-                            </ul>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+			<div class="col-md-5 mx-auto">
+			<div id="first">
+				<div class="myform form ">
+					 <div class="logo mb-3">
+						 <div class="col-md-12 text-center">
+							<h1>Login</h1>
+						 </div>
+					</div>
+                   <form action="">
+                           <div class="form-group">
+                              <label for="username">Username</label>
+                              <input type="text" name="text"  class="form-control" id="username" aria-describedby="emailHelp" placeholder="Enter Username">
+                           </div>
+                           <div class="form-group">
+                              <label for="exampleInputEmail1">Password</label>
+                              <input type="password" name="password" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                           </div>
+                           <div class="form-group mt-4">
+                              <p class="text-center">Trước khi đăng ký vui lòng xem qua  <a href="#">Điều khoản sử dụng</a></p>
+                           </div>
+                           <div class="col-md-12 text-center ">
+                              <button type="button" id="loginBtn" class=" btn btn-block mybtn btn-primary tx-tfm">Login</button>
+                           </div>
+                           <div class="col-md-12 mt-4 ">
+                                <div class="form-group ">
+                                    <p class="text-center">Bạn chưa có tài khoản? <a href="/auth/signup" id="signup">Vui lòng đăng ký tại đây</a></p>
+                                </div>
+                           </div>
+                        </form>
+                 
+				</div>
+			</div>
+		</div>
+      </div>   
+         
 </body>
 <script>
     function setCookie(cname, cvalue, exdays) {
         const d = new Date();
         d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
+        let expires = "expires="+ d.toUTCString();  
         document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
     
@@ -77,5 +91,3 @@
     })
 
 </script>
-
-</html>

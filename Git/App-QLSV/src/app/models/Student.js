@@ -8,7 +8,7 @@ const Student = new Schema({
     age: {type: String},
     class: {type: String},
     image: {type: String},
-
+    introduce: {type: String},
     slug: { type: String, slug: "name", unique: true},
   },{
     timestamps: true,
