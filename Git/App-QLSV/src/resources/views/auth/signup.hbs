@@ -10,8 +10,6 @@
 <body>
    <div class="container mt-4">
       <div class="row">
-         <div id="error" style="color: red;"></div>
-         <div id="ok" style="color: green"></div>
          <div class="col-md-5 mx-auto">
             <div id="second">
                <div class="myform form ">
@@ -22,39 +20,31 @@
                   </div>
                   <form action="">
                      <div class="form-group">
-                        <label for="exampleInputEmail1">Họ Tên</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Fullname">
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Họ Và Tên">
                      </div>
                      <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
-                        <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter Email">
+                        <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Email">
                      </div>
                      <div class="form-group">
-                        <label for="exampleInputEmail1">Username</label>
                         <input type="text" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Username">
                      </div>
                      <div class="form-group">
-                        <label for="exampleInputEmail1">Password</label>
-                        <input type="text" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Enter Password">
+                        <input type="text" id="password"  class="form-control" aria-describedby="emailHelp" placeholder="Password">
                      </div>
                      <div class="form-group">
-                        <label for="exampleInputEmail1">Chức danh</label>
                         <select id="role"  class="form-control" aria-describedby="emailHelp">
-                           <option selected>Vui lòng chọn chức danh</option>
+                           <option selected>Chức Danh</option>
                            <option value="teacher">Giảng viên</option>
                            <option value="student">Sinh viên</option>
-                           {{!-- <option value="manager">Quản lý</option> --}}
+                           <option value="manager">Quản lý</option>
                         </select>
                      </div>
                      <div class="col-md-12 text-center mb-3">
                         <button id="btnSignup" class=" btn btn-block mybtn btn-primary tx-tfm">Đăng Ký</button>
                      </div>
-                     <div class="col-md-12 ">
-                        <div class="form-group">
-                           <p class="text-center"><a href="#" id="signin">Already have an account?</a></p>
-                        </div>
+                     <div class="col-md-12 text-center mb-3">
+                        <a href="/auth/login" id="btnSignup" class=" btn btn-block mybtn btn-secondary tx-tfm">Quay Lại Đăng Nhập</a>
                      </div>
-                        </div>
                   </form>
             </div>
          </div>
@@ -69,21 +59,30 @@
       ok.html("")
       $('#btnSignup').click(function(e){
          e.preventDefault()
-         $.post("/auth/signup", {
-            name: $('#name').val(),
-            email: $('#email').val(),
-            username: $('#username').val(),
-            password: $('#password').val(),
-            //role: $("#role").val()
-         }, function(data){
-            if(data.result == 0) {
-               alert('Tài khoản tồn tại')
-            }
-            if(data.result == 1) {
-               alert('Tạo tài khoản thành công!!')
-               window.location.href = ('/auth/login')
-            }
-         })
+         var name = $('#name').val()
+         var email = $('#email').val()
+         var username = $('#username').val()
+         var password = $('#password').val()
+         var role = $("#role").val()
+         if(name == "" || email == "" || username == "" || password == "" ||role == ""){
+            alert('Chưa điền đủ thông tin')
+         } else{
+            $.post("/auth/signup", {
+               name: name,
+               email: email,
+               username: username,
+               password: password,
+               role: role,
+            }, function(data){
+               if(data.result == 0) {
+                  alert('Tài khoản tồn tại')
+               }
+               if(data.result == 1) {
+                  alert('Tạo tài khoản thành công!!')
+                  window.location.href = ('/auth/login')
+               }
+            })
+         }
       })
    })
 </script>
